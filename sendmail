@@ -1,4 +1,7 @@
 #!/bin/sh
+
+DATE=$(date +%Y%m%d-%H-%M-%S)
+
 prefix="/root/mail/new"
 numPath="/root/mail"
 
