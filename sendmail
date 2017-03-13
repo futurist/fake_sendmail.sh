@@ -2,6 +2,9 @@
 prefix="/root/mail/new"
 numPath="/root/mail"
 
+mkdir -p $prefix
+mkdir -p $numPath
+
 if [ ! -f $numPath/emailNumbers ]; then
 echo "0" > $numPath/emailNumbers
 fi
@@ -9,9 +12,18 @@ emailNumbers=`cat $numPath/emailNumbers`
 emailNumbers=$(($emailNumbers + 1))
 echo $emailNumbers > $numPath/emailNumbers
 name="$prefix/letter_$emailNumbers.eml"
+echo "$0: $@" >> $name
 while IFS= read line
 do
 echo "$line" >> $name
 done
-chmod 777 $name
+
+# get to and subject from body
+to="$(cat $name | sed -n -e 's/^To: //p' | head -n 1)"
+subject="$(cat $name | sed -n -e 's/^Subject: //p' | head -n 1)"
+
+echo $to
+echo $subject
+
+# chmod 777 $name
 /bin/true
