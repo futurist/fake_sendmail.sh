@@ -14,7 +14,7 @@ fi
 emailNumbers=`cat $numPath/emailNumbers`
 emailNumbers=$(($emailNumbers + 1))
 echo $emailNumbers > $numPath/emailNumbers
-name="$prefix/letter_$emailNumbers.eml"
+name="${prefix}/${emailNumbers}-${DATE}.eml"
 echo "$0: $@" >> $name
 while IFS= read line
 do
