@@ -25,7 +25,7 @@ done
 to="$(cat $name | sed -n -e 's/^To: //p' | head -n 1)"
 subject="$(cat $name | sed -n -e 's/^Subject: //p' | head -n 1)"
 
-if [-z "$to"]; then
+if [ -z "$to" ]; then
     echo 'no recipient'
     exit 1
 fi
