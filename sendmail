@@ -25,5 +25,12 @@ subject="$(cat $name | sed -n -e 's/^Subject: //p' | head -n 1)"
 echo $to
 echo $subject
 
+curl -s --user "$MAILGUN_TOKEN" \
+    https://api.mailgun.net/v3/sandbox28d0690f5af045f09f87eff25d2770f6.mailgun.org/messages \
+        -F from='ly-root <postmaster@sandbox28d0690f5af045f09f87eff25d2770f6.mailgun.org>' \
+        -F to="$to" \
+        -F subject="$subject" \
+        -F text="$(cat $name)"
+
 # chmod 777 $name
 /bin/true
