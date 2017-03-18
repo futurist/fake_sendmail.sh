@@ -25,13 +25,14 @@ done
 to="$(cat $name | sed -n -e 's/^To: //p' | head -n 1)"
 subject="$(cat $name | sed -n -e 's/^Subject: //p' | head -n 1)"
 
+echo $to
+echo $subject
+
 if [ -z "$to" ]; then
     echo 'no recipient'
     exit 1
 fi
 
-echo $to
-echo $subject
 
 curl -s --user "$MAILGUN_TOKEN" \
     https://api.mailgun.net/v3/sandbox28d0690f5af045f09f87eff25d2770f6.mailgun.org/messages \
